@@ -9,8 +9,6 @@ This Python script integrates three different security video analysis use cases 
 
 The script processes all .mp4 files in a given folder, runs YOLO inference on each frame, and saves annotated images and 120‑second video clips when a condition is __validated__ (i.e., persists for a user‑defined number of seconds).
 
-This Python script is base on original repsitory https://github.com/theerawatramchuen/find_vacuumeNspool_holding_clip
-
 # Features
 * __Single entry point –__ choose the analysis mode via a command‑line argument.
 
@@ -111,4 +109,38 @@ The timestamp is generated when the condition is first validated; the XXX is a m
 If it persists for at least `validation_time` seconds, it is __validated__.
 6. Upon validation, the script saves the two images and a 120‑second video clip.
 It then jumps forward in the video to just after the clip ends to avoid repeated triggers.
-7.The live display shows the current frame, processing speed, and video information.
+7. The live display shows the current frame, processing speed, and video information.
+
+# Customisation
+## Changing the clip duration
+Inside the `__init__` method of `CombinedVideoYOLOInference`, you can modify:
+```
+python
+self.clip_target_duration = 120   # total length in seconds
+self.clip_before_duration = 60    # seconds before detection
+self.clip_after_duration = 60     # seconds after detection
+```
+## Adding a new area
+1. Define a new video folder constant at the top.
+2. Add the area name to the `choices` in `argparse`.
+3. Implement a `_check_conditions_<new_area>` method that returns a set of condition keys.
+4. In `process_detections`, call the new checker when `self.area` matches.
+5. (Optional) If your condition involves only one object, use `self.get_condition_key(..., det2=None).`
+
+## Notes
+* The script uses `cv2.imshow` for display; if you run it on a headless server, remove or comment out the display lines.
+
+* The validation mechanism groups detections by approximate position (`/10` quantisation). This helps track the same object pair across frames even if the boxes jitter slightly.
+
+* The `get_condition_key` method now handles both one‑ and two‑object conditions.
+
+## Troubleshooting
+* __No videos found –__ Check that the video folder path is correct and contains .mp4 files.
+
+* __Model file not found –__ Verify the path to your YOLO weights.
+
+* __Low performance –__ Reduce the validation time or use a smaller YOLO model (e.g. yolov8n.pt).
+
+* __No clips saved –__ Ensure that the confidence threshold is low enough to capture detections, and that the validation time is not too long for your scenario.
+
+This Python script is base on original repository https://github.com/theerawatramchuen/find_vacuumeNspool_holding_clip
