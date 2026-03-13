@@ -1,4 +1,4 @@
-# cctv_ai_security
+# CCTV AI SECURITY SYSTEM
 This Python script integrates three different security video analysis use cases into a single tool:
 
 * __Scrap area:__ Detects when a person overlaps with a car or truck.
