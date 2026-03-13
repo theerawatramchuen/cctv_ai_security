@@ -64,5 +64,7 @@ python combined_security.py <area> <model_path> [options]
 | area          | One of: scrap, wirebond, store – selects the detection logic.   |
 | model_path    | Path to the YOLO model weights file (e.g. yolov8n.pt, best.pt). |
 ## Optional Arguments
-### Option	Default	Description
+| Option	       | Default	   | Description                                        |
+|---------------|:----------:|----------------------------------------------------|
+|--conf         |0.5         |Confidence threshold for detections. Only detections above this are considered.|
 
