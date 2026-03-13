@@ -71,3 +71,44 @@ python combined_security.py <area> <model_path> [options]
 |`--validation_time` |`2.0`       |Time in seconds a condition must persist before being considered valid.|
 |`--line_thickness`  |`1`         |Thickness of bounding boxes drawn on the annotated frames.|
 
+# Examples
+1. __Scrap area__ with a COCO‑pretrained model:
+```
+python combined_security.py scrap C:\models\yolo11s.pt
+```
+2. __Wirebond area__ with a custom‑trained model, higher confidence, shorter validation:
+```
+python combined_security.py wirebond D:\weights\best.pt --conf 0.7 --validation_time 1.0
+```
+3. __Store area__ with a person‑detection model:
+```
+python combined_security.py store /home/user/models/person.pt
+```
+# Output
+For each video, the script creates an output folder named after the area (e.g. `scrap_area_output`, `store_area_output`). Inside, you will find:
+
+* __Images:__
+
+ * `YYYYMMDD-HHMMSS-XXX-O.jpg` – original frame at the moment of validation.
+
+ * `YYYYMMDD-HHMMSS-XXX-R.jpg` – same frame with YOLO annotations.
+
+* __Video clips:__
+
+ * `YYYYMMDD-HHMMSS-XXX.mp4` – a 120‑second clip centred on the detection (60 s before, 60 s after).
+
+The timestamp is generated when the condition is first validated; the XXX is a millisecond value to ensure uniqueness.
+
+# How It Works
+1. The script scans the chosen video folder for all .mp4 files.
+2. For each video, it reads frames and runs the YOLO model.
+3. Detections are grouped by class and filtered by confidence.
+4. Depending on the selected area, the script checks for specific conditions:
+ * Scrap: person overlapping car or truck.
+ * Wirebond: vacuume inside/overlapping normal or suspected; spool inside/overlapping grove.
+ * Store: any person detection.
+5. Each unique condition (based on object positions) is tracked across frames.
+If it persists for at least validation_time seconds, it is validated.
+6. Upon validation, the script saves the two images and a 120‑second video clip.
+It then jumps forward in the video to just after the clip ends to avoid repeated triggers.
+7.The live display shows the current frame, processing speed, and video information.
