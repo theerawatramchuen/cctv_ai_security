@@ -100,15 +100,15 @@ For each video, the script creates an output folder named after the area (e.g. `
 The timestamp is generated when the condition is first validated; the XXX is a millisecond value to ensure uniqueness.
 
 # How It Works
-1. The script scans the chosen video folder for all .mp4 files.
+1. The script scans the chosen video folder for all `.mp4` files.
 2. For each video, it reads frames and runs the YOLO model.
 3. Detections are grouped by class and filtered by confidence.
 4. Depending on the selected area, the script checks for specific conditions:
- * Scrap: person overlapping car or truck.
- * Wirebond: vacuume inside/overlapping normal or suspected; spool inside/overlapping grove.
- * Store: any person detection.
+   * __Scrap:__ `person` overlapping `car` or `truck`.
+   * __Wirebond:__ `vacuume` inside/overlapping `normal` or `suspected`; `spool` inside/overlapping `grove`.
+   * __Store:__ any `person` detection.
 5. Each unique condition (based on object positions) is tracked across frames.
-If it persists for at least validation_time seconds, it is validated.
+If it persists for at least `validation_time` seconds, it is __validated__.
 6. Upon validation, the script saves the two images and a 120‑second video clip.
 It then jumps forward in the video to just after the clip ends to avoid repeated triggers.
 7.The live display shows the current frame, processing speed, and video information.
