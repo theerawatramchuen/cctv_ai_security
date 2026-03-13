@@ -29,3 +29,25 @@ This Python script is base on original repsitory https://github.com/theerawatram
 * __Resume after clip –__ after saving a clip, the processing jumps forward to just after the clip ends to avoid duplicate triggers.
 
 * __Live display –__ shows the video with real‑time annotations and performance metrics. Press space to pause, q to quit.
+
+# Requirements
+* Python 3.8+
+
+* Ultralytics YOLO
+
+* OpenCV (cv2)
+
+* NumPy
+
+Install dependencies with:
+```
+pip install ultralytics opencv-python numpy
+```
+# Configuration
+Before running, you must set the paths to your video folders.
+Edit the constants at the top of the script:
+```
+SCRAP_VIDEO_FOLDER = r"D:\cctvdownload\_scrap"        # folder with videos for scrap area
+WIREBOND_VIDEO_FOLDER = r"D:\cctvdownload\_wirebond"      # folder with videos for wirebond area
+STORE_VIDEO_FOLDER = r"D:\cctvdownload\_store"       # folder with videos for store area
+```
