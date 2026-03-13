@@ -20,11 +20,11 @@ This Python script is base on original repsitory https://github.com/theerawatram
 
 * __Clip saving –__ when a condition is validated, the script saves:
 
-  * __The original frame (as JPEG)
+  * The original frame (as JPEG)
 
-  * __The annotated frame (with bounding boxes)
+  * The annotated frame (with bounding boxes)
 
-  * __A 120‑second video clip centred on the detection (60 seconds before, 60 seconds after)
+  * A 120‑second video clip centred on the detection (60 seconds before, 60 seconds after)
 
 * __Resume after clip –__ after saving a clip, the processing jumps forward to just after the clip ends to avoid duplicate triggers.
 
