@@ -51,3 +51,15 @@ SCRAP_VIDEO_FOLDER = r"D:\cctvdownload\_scrap"        # folder with videos for s
 WIREBOND_VIDEO_FOLDER = r"D:\cctvdownload\_wirebond"      # folder with videos for wirebond area
 STORE_VIDEO_FOLDER = r"D:\cctvdownload\_store"       # folder with videos for store area
 ```
+Each folder should contain one or more .mp4 files. The script processes them sequentially.
+
+# Usage
+Run the script from the command line:
+```
+python combined_security.py <area> <model_path> [options]
+```
+# Positional Arguments
+| Argument |	Description | 
+| area | One of: scrap, wirebond, store – selects the detection logic. |
+| model_path | Path to the YOLO model weights file (e.g. yolov8n.pt, best.pt). |
+
