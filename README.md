@@ -9,7 +9,7 @@ This Python script integrates three different security video analysis use cases 
 
 The script processes all .mp4 files in a given folder, runs YOLO inference on each frame, and saves annotated images and 120‑second video clips when a condition is __validated__ (i.e., persists for a user‑defined number of seconds).
 
-# Features
+## Features
 * __Single entry point –__ choose the analysis mode via a command‑line argument.
 
 * __Per‑area configuration –__ each area uses its own condition logic and video folder.
@@ -28,7 +28,7 @@ The script processes all .mp4 files in a given folder, runs YOLO inference on ea
 
 * __Live display –__ shows the video with real‑time annotations and performance metrics. Press space to pause, q to quit.
 
-# Requirements
+## Requirements
 * Python 3.8+
 
 * Ultralytics YOLO
@@ -41,7 +41,7 @@ Install dependencies with:
 ```
 pip install ultralytics opencv-python numpy
 ```
-# Configuration
+## Configuration
 Before running, you must set the paths to your video folders.
 Edit the constants at the top of the script:
 ```
@@ -51,25 +51,25 @@ STORE_VIDEO_FOLDER = r"D:\cctvdownload\_store"       # folder with videos for st
 ```
 Each folder should contain one or more .mp4 files. The script processes them sequentially.
 
-# Usage
+## Usage
 Run the script from the command line:
 ```
 python combined_security.py <area> <model_path> [options]
 ```
-# Positional Arguments
+## Positional Arguments
 | Argument      |	Description                                                     | 
 | ------------- |:---------------------------------------------------------------:|
 | `area`        | One of: `scrap`, `wirebond`, `store` – selects the detection logic. |
 | `model_path`  | Path to the YOLO model weights file (e.g. `yolov8n.pt`, `best.pt`). |
 
-# Optional Arguments
+## Optional Arguments
 | Option	            | Default	   | Description                                        |
 |--------------------|:----------:|----------------------------------------------------|
 |`--conf`            |`0.5`       |Confidence threshold for detections. Only detections above this are considered.|
 |`--validation_time` |`2.0`       |Time in seconds a condition must persist before being considered valid.|
 |`--line_thickness`  |`1`         |Thickness of bounding boxes drawn on the annotated frames.|
 
-# Examples
+## Examples
 1. __Scrap area__ with a COCO‑pretrained model:
 ```
 python combined_security.py scrap C:\models\yolo11s.pt
@@ -82,7 +82,7 @@ python combined_security.py wirebond D:\weights\best.pt --conf 0.7 --validation_
 ```
 python combined_security.py store /home/user/models/person.pt
 ```
-# Output
+## Output
 For each video, the script creates an output folder named after the area (e.g. `scrap_area_output`, `store_area_output`). Inside, you will find:
 
 * __Images:__
@@ -97,7 +97,7 @@ For each video, the script creates an output folder named after the area (e.g. `
 
 The timestamp is generated when the condition is first validated; the XXX is a millisecond value to ensure uniqueness.
 
-# How It Works
+## How It Works
 1. The script scans the chosen video folder for all `.mp4` files.
 2. For each video, it reads frames and runs the YOLO model.
 3. Detections are grouped by class and filtered by confidence.
@@ -111,8 +111,8 @@ If it persists for at least `validation_time` seconds, it is __validated__.
 It then jumps forward in the video to just after the clip ends to avoid repeated triggers.
 7. The live display shows the current frame, processing speed, and video information.
 
-# Customisation
-## Changing the clip duration
+## Customisation
+### Changing the clip duration
 Inside the `__init__` method of `CombinedVideoYOLOInference`, you can modify:
 ```
 python
@@ -120,21 +120,21 @@ self.clip_target_duration = 120   # total length in seconds
 self.clip_before_duration = 60    # seconds before detection
 self.clip_after_duration = 60     # seconds after detection
 ```
-## Adding a new area
+### Adding a new area
 1. Define a new video folder constant at the top.
 2. Add the area name to the `choices` in `argparse`.
 3. Implement a `_check_conditions_<new_area>` method that returns a set of condition keys.
 4. In `process_detections`, call the new checker when `self.area` matches.
 5. (Optional) If your condition involves only one object, use `self.get_condition_key(..., det2=None).`
 
-## Notes
+### Notes
 * The script uses `cv2.imshow` for display; if you run it on a headless server, remove or comment out the display lines.
 
 * The validation mechanism groups detections by approximate position (`/10` quantisation). This helps track the same object pair across frames even if the boxes jitter slightly.
 
 * The `get_condition_key` method now handles both one‑ and two‑object conditions.
 
-## Troubleshooting
+### Troubleshooting
 * __No videos found –__ Check that the video folder path is correct and contains .mp4 files.
 
 * __Model file not found –__ Verify the path to your YOLO weights.
