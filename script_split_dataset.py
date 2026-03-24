@@ -3,8 +3,8 @@ import random
 import shutil
 
 # กำหนด path
-input_dir = './wait_data_for_split'  # โฟลเดอร์ต้นทาง
-target_base_dir = './splited_dataset'  # โฟลเดอร์ปลายทาง
+input_dir = './imagedataset/wait_data_for_split'  # โฟลเดอร์ต้นทาง
+target_base_dir = './imagedataset/splited_dataset'  # โฟลเดอร์ปลายทาง
 
 # อัตราส่วนแบ่ง
 split_ratios = {
