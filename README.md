@@ -72,15 +72,15 @@ python cctv_ai_security2.py <area> <model_path> [options]
 ## Examples
 1. __Scrap area__ with a COCO‑pretrained model:
 ```
-python combined_security.py scrap C:\models\yolo11s.pt
+python cctv_ai_security2.py scrap C:\models\yolo11s.pt
 ```
 2. __Wirebond area__ with a custom‑trained model, higher confidence, shorter validation:
 ```
-python combined_security.py wirebond D:\weights\best.pt --conf 0.7 --validation_time 1.0
+python cctv_ai_security2.py wirebond D:\weights\best.pt --conf 0.7 --validation_time 1.0
 ```
 3. __Store area__ with a person‑detection model:
 ```
-python combined_security.py store /home/user/models/person.pt
+python cctv_ai_security2.py store /home/user/models/person.pt
 ```
 ## Output
 For each video, the script creates an output folder named after the area (e.g. `scrap_area_output`, `store_area_output`). Inside, you will find:
