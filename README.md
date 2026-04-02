@@ -54,7 +54,7 @@ Each folder should contain one or more .mp4 files. The script processes them seq
 ## Usage
 Run the script from the command line:
 ```
-python combined_security.py <area> <model_path> [options]
+python cctv_ai_security2.py <area> <model_path> [options]
 ```
 ## Positional Arguments
 | Argument      |	Description                                                     | 
