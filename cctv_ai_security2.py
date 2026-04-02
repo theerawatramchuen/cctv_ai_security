@@ -12,7 +12,7 @@ from ultralytics import YOLO
 # CONFIGURATION – adjust these paths to match your environment
 SCRAP_VIDEO_FOLDER = r"D:\cctvdownload\_scrap"        # folder with videos for scrap area
 WIREBOND_VIDEO_FOLDER = r"D:\cctvdownload\_wirebond"      # folder with videos for wirebond area
-STORE_VIDEO_FOLDER = r"D:\cctvdownload\_store"       # folder with videos for store area  # <-- NEW
+STORE_VIDEO_FOLDER = r"D:\cctvdownload"       # folder with videos for store area  # <-- NEW
 # ----------------------------------------------------------------------
 
 class CombinedVideoYOLOInference:
