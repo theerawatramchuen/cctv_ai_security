@@ -32,6 +32,9 @@ Usage:
         --cooldown  10          \\   # min frames between saves for same ROI (default 10)
         --decay     0.90            # heatmap temporal decay (default 0.90)
 
+
+   python roi_movement_detector.py --video NVR_ch15_main_20260528150000_20260528150559_restrict_area.mp4 --config 127.json --output output_frames/ --threshold 0.5
+
 Reference: https://claude.ai/share/45a8411b-5640-476d-94a4-1c9649f49905
 """
 
